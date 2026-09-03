@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Price Prediction</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #20b9d0;
+            border-bottom: 2px solid #20b9d0;
+            padding-bottom: 15px;
+        }
+
+        .section {
+            border-bottom: 2px solid #20b9d0;
+            padding: 20px 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+        }
+
+        input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            margin-top: 8px;
+            border: none;
+            border-bottom: 2px solid #20b9d0;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .predict-button {
+            margin-top: 25px;
+            background: #20b9d0;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .predict-button:hover {
+            background: #159bb0;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Flight Price Prediction</h1>
+
+    <form action="/predict" method="POST">
+
+        <!-- Departure City -->
+        <div class="section">
+            <div class="section-title">Departure City:</div>
+
+            <label><input type="radio" name="from" value="Aracaju (SE)" required> Aracaju (SE)</label>
+            <label><input type="radio" name="from" value="Brasilia (DF)"> Brasilia (DF)</label>
+            <label><input type="radio" name="from" value="Campo Grande (MS)"> Campo Grande (MS)</label>
+            <label><input type="radio" name="from" value="Florianopolis (SC)"> Florianopolis (SC)</label>
+            <label><input type="radio" name="from" value="Natal (RN)"> Natal (RN)</label>
+            <label><input type="radio" name="from" value="Recife (PE)"> Recife (PE)</label>
+            <label><input type="radio" name="from" value="Rio de Janeiro (RJ)"> Rio de Janeiro (RJ)</label>
+            <label><input type="radio" name="from" value="Salvador (BH)"> Salvador (BH)</label>
+            <label><input type="radio" name="from" value="Sao Paulo (SP)"> Sao Paulo (SP)</label>
+        </div>
+
+        <!-- Destination City -->
+        <div class="section">
+            <div class="section-title">Destination City:</div>
+
+            <label><input type="radio" name="to" value="Aracaju (SE)" required> Aracaju (SE)</label>
+            <label><input type="radio" name="to" value="Brasilia (DF)"> Brasilia (DF)</label>
+            <label><input type="radio" name="to" value="Campo Grande (MS)"> Campo Grande (MS)</label>
+            <label><input type="radio" name="to" value="Florianopolis (SC)"> Florianopolis (SC)</label>
+            <label><input type="radio" name="to" value="Natal (RN)"> Natal (RN)</label>
+            <label><input type="radio" name="to" value="Recife (PE)"> Recife (PE)</label>
+            <label><input type="radio" name="to" value="Rio de Janeiro (RJ)"> Rio de Janeiro (RJ)</label>
+            <label><input type="radio" name="to" value="Salvador (BH)"> Salvador (BH)</label>
+            <label><input type="radio" name="to" value="Sao Paulo (SP)"> Sao Paulo (SP)</label>
+        </div>
+
+        <!-- Flight Type -->
+        <div class="section">
+            <div class="section-title">Flight Type:</div>
+
+            <label><input type="radio" name="flightType" value="economic" required> Economic</label>
+            <label><input type="radio" name="flightType" value="FirstClass"> FirstClass</label>
+            <label><input type="radio" name="flightType" value="Premium"> Premium</label>
+        </div>
+        
+        <!-- Time -->
+        <div class="section">
+            <div class="section-title">Time:</div>
+
+            <input type="number" name="time" min="0"
+            placeholder="Time" required>
+        </div>
+
+        <!-- Distance -->
+        <div class="section">
+            <div class="section-title">Distance:</div>
+
+            <input type="number" name="distance" min="0" step="any"
+            placeholder="Distance" required>
+        </div>
+
+        <!-- Agency -->
+        <div class="section">
+            <div class="section-title">Agency:</div>
+
+            <label><input type="radio" name="agency" value="CloudFy" required> CloudFy</label>
+            <label><input type="radio" name="agency" value="FlyingDrops"> FlyingDrops</label>
+            <label><input type="radio" name="agency" value="Rainbow"> Rainbow</label>
+        </div>
+
+        <!-- Day -->
+        <div class="section">
+            <div class="section-title">Day:</div>
+            <input type="number" name="day" min="1" max="31"
+            placeholder="Day" required>
+        </div>
+
+        <!-- Weekday -->
+        <div class="section">
+            <div class="section-title">Weekday (0=Sunday, 6=Saturday):</div>
+
+            <input type="number" name="day_of_week" min="0" max="6"
+                   placeholder="Day of the week" required>
+        </div>
+
+        <!-- Month -->
+        <div class="section">
+            <div class="section-title">Month:</div>
+
+            <input type="number" name="month" min="1" max="12"
+                   placeholder="Month" required>
+        </div>
+
+        <!-- Year -->
+        <div class="section">
+            <div class="section-title">Year:</div>
+
+            <input type="number" name="year"
+                   placeholder="Year" required>
+        </div>
+
+        <button type="submit" class="predict-button">Predict</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

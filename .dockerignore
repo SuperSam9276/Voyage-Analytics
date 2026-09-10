@@ -1,0 +1,14 @@
+notebooks/
+training/
+tests/
+data/
+.git/
+.gitignore
+.gitattributes
+__pycache__/
+*.pyc
+.venv/
+.env
+*.ipynb
+*.zip
+README.md

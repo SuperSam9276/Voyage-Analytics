@@ -156,6 +156,8 @@ Deployed as a Docker container, suitable for any container-based host
 (Hugging Face Spaces, Render, Fly.io, etc.). See `Dockerfile` for the build
 definition.
 
+Streamlit Deployment: https://voyage-analytics-vytrzbvfyunt2vxywgjcm5.streamlit.app/
+
 ---
 
 ## Notes on data
